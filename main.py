@@ -21,15 +21,18 @@ class Main(QWidget):
         self.width = 2100
         self.height = 1400
 
-
-        self.createGraph()
-        self.createMetrics()
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
         self.show()
 
     def layout(self):
+
+        self.createGraph()
+        self.createMetrics()
+        self.createSettings()
+        self.createFooter()
+
         logo = QLabel("Crypto B0t")
         sign_in_btn = QPushButton("Sign In")
         sign_in_btn.setGeometry(QRect(0, 0, 50, 100))
@@ -43,6 +46,12 @@ class Main(QWidget):
         main.addLayout(topLayout, 0, 0, 1, 2)
         main.addWidget(self.graphBox, 1, 0)
         main.addWidget(self.metricsBox, 1, 1)
+        main.addWidget(self.settingsBox, 2, 0)
+        main.addWidget(self.footerBox, 2, 1)
+        main.setColumnStretch(0, 6)
+        main.setColumnStretch(1, 4)
+        main.setRowStretch(1, 8)
+        main.setRowStretch(2, 2)
         self.setLayout(main)
 
     def createGraph(self):
@@ -65,11 +74,25 @@ class Main(QWidget):
         middleRight.addWidget(transaction_log)
         self.graphBox.setLayout(middleRight)
 
-    def settings(self): 
-        pass
+    def createSettings(self): 
+        self.settingsBox = QGroupBox("Settings")
 
-    def footer(self):
-        pass
+        setting_label = QLabel("Setting")
+        setting_label.setGeometry(QRect(0, 0, 2000, 200))
+        
+        lowerMiddle = QHBoxLayout()
+        lowerMiddle.addWidget(setting_label)
+
+        self.settingsBox.setLayout(lowerMiddle)
+
+
+    def createFooter(self):
+        self.footerBox = QGroupBox("Footer")
+        footer_label = QLabel("@htb 2019")
+        lower = QVBoxLayout()
+        lower.addWidget(footer_label)
+
+        self.footerBox.setLayout(lower)
 
 
     

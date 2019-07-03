@@ -1,61 +1,54 @@
-from binance.client import Client
-client = Client('7gpPdPB0lvBLlWdrPHPdyB4Lmmec5OSNbNSDXM2FUoVbSfsSDWzmkCHDTJ3NqEtl', 'UK33MyhC9IzSKFrXPGFqGThTcRnexOrG5edy65HF8wpQTuqmoNYOKBGm9TrEw6PP')
+import ccxt
+#
+# hitbtc   = ccxt.hitbtc({'verbose': True})
+# bitmex   = ccxt.bitmex()
+# huobipro = ccxt.huobipro()
+# binance     = ccxt.binance({
+#     'apiKey': '7o6rbHZbD2uJcZC3XIGyZHUjxStCdByNUufe52r2gv2zgr3lr8fHeBibyD5Cr3UW',
+#     'secret': 'ISqKlDLESnNbmdHT5nVpYjtdF3yHcN7LaXSbJQvma0FUD1bY5Yz12biR6LBQeD3M',
+# })
+# kraken = ccxt.kraken({
+#     'apiKey': 'YOUR_PUBLIC_API_KEY',
+#     'secret': 'YOUR_SECRET_PRIVATE_KEY',
+# })
 
-# get market depth
-depth = client.get_order_book(symbol='BNBBTC')
+# exchange_id = 'binance'
+# exchange_class = getattr(ccxt, exchange_id)
+# exchange = exchange_class({
+#     'apiKey': '7o6rbHZbD2uJcZC3XIGyZHUjxStCdByNUufe52r2gv2zgr3lr8fHeBibyD5Cr3UW',
+#     'secret': 'ISqKlDLESnNbmdHT5nVpYjtdF3yHcN7LaXSbJQvma0FUD1bY5Yz12biR6LBQeD3M',
+#     'timeout': 30000,
+#     'enableRateLimit': True,
+# })
+MIN_AMOUNT ={}
+MIN_ORDERS = {}
 
-# place a test market buy order, to place an actual order use the create_order function
-order = client.create_test_order(
-    symbol='BNBBTC',
-    side=Client.SIDE_BUY,
-    type=Client.ORDER_TYPE_MARKET,
-    quantity=100)
+binance = ccxt.binance({
+    'apiKey': '7o6rbHZbD2uJcZC3XIGyZHUjxStCdByNUufe52r2gv2zgr3lr8fHeBibyD5Cr3UW',
+    'secret': 'ISqKlDLESnNbmdHT5nVpYjtdF3yHcN7LaXSbJQvma0FUD1bY5Yz12biR6LBQeD3M',
+})
 
-# get all symbol prices
-prices = client.get_all_tickers()
+print(binance.fetch_balance())
 
-# withdraw 100 ETH
-# check docs for assumptions around withdrawals
-from binance.exceptions import BinanceAPIException, BinanceWithdrawException
-try:
-    result = client.withdraw(
-        asset='ETH',
-        address='<eth_address>',
-        amount=100)
-except BinanceAPIException as e:
-    print(e)
-except BinanceWithdrawException as e:
-    print(e)
-else:
-    print("Success")
-
-# fetch list of withdrawals
-withdraws = client.get_withdraw_history()
-
-# fetch list of ETH withdrawals
-eth_withdraws = client.get_withdraw_history(asset='ETH')
-
-# get a deposit address for BTC
-address = client.get_deposit_address(asset='BTC')
-
-# start aggregated trade websocket for BNBBTC
-def process_message(msg):
-    print("message type: {}".format(msg['e']))
-    print(msg)
-    # do something
-
-from binance.websockets import BinanceSocketManager
-bm = BinanceSocketManager(client)
-bm.start_aggtrade_socket('BNBBTC', process_message)
-bm.start()
-
-# get historical kline data from any date range
-
-# fetch 1 minute klines for the last day up until now
-klines = client.get_historical_klines("BNBBTC", Client.KLINE_INTERVAL_1MINUTE, "1 day ago UTC")
-
-# fetch 30 minute klines for the last month of 2017
-klines = client.get_historical_klines("ETHBTC", Client.KLINE_INTERVAL_30MINUTE, "1 Dec, 2017", "1 Jan, 2018")
-
-# fetch weekly klines since it listed
-klines = client.get_historical_klines("NEOBTC", Client.KLINE_INTERVAL_1WEEK, "1 Jan, 2017")
+# print(ccxt.exchanges)
+#
+# hitbtc_markets = hitbtc.load_markets()
+#
+# print(hitbtc.id, hitbtc_markets)
+# print(bitmex.id, bitmex.load_markets())
+# print(huobipro.id, huobipro.load_markets())
+#
+# print(hitbtc.fetch_order_book(hitbtc.symbols[0]))
+# print(bitmex.fetch_ticker('BTC/USD'))
+# print(huobipro.fetch_trades('LTC/CNY'))
+#
+# print(exmo.fetch_balance())
+#
+# # sell one ฿ for market price and receive $ right now
+# print(exmo.id, exmo.create_market_sell_order('BTC/USD', 1))
+#
+# # limit buy BTC/EUR, you pay €2500 and receive ฿1  when the order is closed
+# print(exmo.id, exmo.create_limit_buy_order('BTC/EUR', 1, 2500.00))
+#
+# # pass/redefine custom exchange-specific order params: type, amount, price, flags, etc...
+# kraken.create_market_buy_order('BTC/USD', 1, {'trading_agreement': 'agree'})

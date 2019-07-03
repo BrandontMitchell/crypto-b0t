@@ -1,5 +1,5 @@
 from binance.client import Client
-client = Client(7gpPdPB0lvBLlWdrPHPdyB4Lmmec5OSNbNSDXM2FUoVbSfsSDWzmkCHDTJ3NqEtl, UK33MyhC9IzSKFrXPGFqGThTcRnexOrG5edy65HF8wpQTuqmoNYOKBGm9TrEw6PP)
+client = Client('7gpPdPB0lvBLlWdrPHPdyB4Lmmec5OSNbNSDXM2FUoVbSfsSDWzmkCHDTJ3NqEtl', 'UK33MyhC9IzSKFrXPGFqGThTcRnexOrG5edy65HF8wpQTuqmoNYOKBGm9TrEw6PP')
 
 # get market depth
 depth = client.get_order_book(symbol='BNBBTC')

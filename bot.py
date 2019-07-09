@@ -26,14 +26,6 @@ exchange.fetch_trades('USDC/BTC')
 # # print(binance.fetch_ticker('BTC/USDC')['weightedAvgPrice'])
 
 
-# high = binance.fetch_ticker('BTC/USDC')['high']
-# print((int(high) + int(low))/2)
-
-# print(binance.fetch_ticker('BTC/USDC')['info']['weightAvgPrice'])
-# for symbol in binance.symbols:
-#     if symbol == 'BTC/BNB':
-#         print("found")
-
 
 # symbol = 'XRP/BTC'
 # type = 'market'

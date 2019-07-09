@@ -1,6 +1,7 @@
 import ccxt
 import time
 import json
+import pandas as pd
 
 exchange_id = 'binance'
 exchange_class = getattr(ccxt, exchange_id)
@@ -11,11 +12,13 @@ exchange = exchange_class({
 })
 
 print("23452345;l234jk5;l234j5;lkj345;lk")
-print(exchange.fetch_balance())
+exchange.fetch_balance()
 print("23452345;l234jk5;l234j5;lkj345;lk")
-print(exchange.load_markets)
-print(exchange.symbols)
-orders = exchange.fetch_order_book(exchange.symbols[0])
+exchange.fetch_trades('USDC/BTC')
+
+# print(exchange.load_markets)
+# print(exchange.symbols)
+# orders = exchange.fetch_order_book(exchange.symbols[0])
 # print(f' orders -- {orders}')
 # print(orders['bids'][0][0])
 # print(binance.has['fetchTicker'])
@@ -32,20 +35,43 @@ orders = exchange.fetch_order_book(exchange.symbols[0])
 #         print("found")
 
 
-symbol = 'XRP/BTC'
-type = 'market'
-side = 'sell'
-amount = 50
-price = 0.40 
-params = {
-    'test': True
-}
+# symbol = 'XRP/BTC'
+# type = 'market'
+# side = 'sell'
+# amount = 50
+# price = 0.40 
+# params = {
+#     'test': True
+# }
 
-order = exchange.create_order(symbol, type, side, amount)
-print(order)
+# order = exchange.create_order(symbol, type, side, amount)
+# print(order)
 
 def boughtPrice():
     '''
     hold variable for initial buy price
     '''
     pass
+
+def pullPrice(symbol):
+    '''
+    gathers BTC price for last _____ (interval of time)
+    '''
+    balance = exchange.fetch_balance()
+
+    for ticker in exchange.fetch_tickers(symbol):
+        time.sleep(exchange.rateLimit / 1000)
+        resp = exchange.fetch_ohlcv(ticker, '1d')
+        # print(resp)
+        
+        df = pd.DataFrame(resp, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
+        print(df)
+
+    # for trade in exchange.fetch_trades('USDC/BTC', since=):
+    #     if trade['side'] == 'buy':
+    #         print(trade['price'])
+    #         print(trade['amount'])
+
+if __name__ == '__main__':
+    pullPrice('BTC/USDC')
+    print('done')

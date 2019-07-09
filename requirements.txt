@@ -1,0 +1,4 @@
+matplotlib
+requests
+PyQt5
+ccxt

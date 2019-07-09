@@ -7,6 +7,8 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
         QSlider, QSpinBox, QStyleFactory, QTableWidget, QTabWidget, QTextEdit,
         QVBoxLayout, QWidget)
 import sys
+import requests
+import matplotlib
 
 class Main(QWidget):
     
@@ -94,6 +96,11 @@ class Main(QWidget):
 
         self.footerBox.setLayout(lower)
 
+    def bitcoinTrack(self):
+        '''
+            live bitcoin tracking
+        '''
+        pass
 
     
 

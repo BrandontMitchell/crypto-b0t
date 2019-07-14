@@ -2,3 +2,8 @@ matplotlib
 requests
 PyQt5
 ccxt
+pickle
+plotly
+quandl
+numpy
+pandas

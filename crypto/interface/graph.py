@@ -1,8 +1,10 @@
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import pandas as pd 
+import requests
+import collections
 import matplotlib.pyplot as pt
-import datetime as datetime
+import datetime
 import json
 
 
@@ -12,32 +14,31 @@ class PricePlotter():
     """
 
     def __init__(self, coin):
-        self.baseURL = 'https://api.coindesk.com/v1/bpi/historical/close.json?'
-        # self.params = {
-        #     'start': '1',
-        #     'limit': '5000',
-        #     'convert': 'USD'
-        # }
-        # self.headers = {
-        #     'Accepts': 'application/json',
-        #     'X-CMC_PRO_API_KEY': '4d75989f-6de0-49e3-aef2-5f2a2464c7a9'
-        # }
-
-        # self.key = '4d75989f-6de0-49e3-aef2-5f2a2464c7a9'
-        self.get_data('btc')
+        self.baseURL = 'https://api.coindesk.com/v1/bpi/'
+        self.today = datetime.date.today()
+        self.historical_date = datetime.date.today()-datetime.timedelta(days=200)
+        self.coin = 'btc'
+        self.get_historical_data(self.coin, self.historical_date, self.today)
 
 
     def get_historical_data(self, coin, start, end):
-        self.session = Session()
-        self.session.headers.update(self.headers)
+        '''
+        gathers historical data with given currency, start, end
+        '''
+        start = f'{start.year:#02d}-{start.month:#02}-{start.day:#02}'
+        end = f'{end.year:#02}-{end.month:#02d}-{end.day:#02d}'
+        url = f'{self.baseURL}historical/close.json?currency={coin}&start={start}&end={end}'
+        print(url)
+        r = requests.get(url).json()['bpi']
 
-        try:
-            resp = self.session.get(self.baseURL, params=self.params)
-            data = json.loads(resp.text)
-            print(data)
 
-        except (ConnectionError, Timeout, TooManyRedirects) as e:
-            print(e)
+        print(r)
+        prices = r.values()
+        dates = r.keys()
+        print(prices)
+        print(dates)
+        # print(data_dict)
+        
 
 
 if __name__ == '__main__':

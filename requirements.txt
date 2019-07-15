@@ -2,8 +2,6 @@ matplotlib
 requests
 PyQt5
 ccxt
-pickle
-plotly
-quandl
+datetime
 numpy
 pandas

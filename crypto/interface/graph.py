@@ -1,8 +1,5 @@
-from requests import Request, Session
-from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import pandas as pd 
 import requests
-import collections
 import matplotlib.pyplot as pt
 import datetime
 import json

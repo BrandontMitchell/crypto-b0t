@@ -32,13 +32,16 @@ class PricePlotter():
         prices = r.values()
         dates = r.keys()
         print(prices)
-        print(dates)~
+        print(dates)
+
         
+
         lists = sorted(r.items())
         x, y = zip(*lists)
-        plt.plot(x,y)
+
         plt.ylabel('Price (USD)')
         plt.xlabel('Time')
+        plt.title(f'{coin} price timeline')
         plt.show() 
         
 

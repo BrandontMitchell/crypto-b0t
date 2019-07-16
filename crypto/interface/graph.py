@@ -12,10 +12,10 @@ class PricePlotter():
     Get current price, and historical data for specified coin. This class will plot that data
     """
 
-    def __init__(self, coin):
+    def __init__(self, coin, time):
         self.baseURL = 'https://api.coindesk.com/v1/bpi/'
         self.today = datetime.date.today()
-        self.historical_date = datetime.date.today()-datetime.timedelta(days=200)
+        self.historical_date = datetime.date.today()-datetime.timedelta(days=time)
         self.coin = 'btc'
         self.get_historical_data(self.coin, self.historical_date, self.today)
 
@@ -32,8 +32,8 @@ class PricePlotter():
         prices = r.values()
         dates = r.keys()
         print(prices)
-        print(dates)
-
+        print(dates)~
+        
         lists = sorted(r.items())
         x, y = zip(*lists)
         plt.plot(x,y)
@@ -44,4 +44,4 @@ class PricePlotter():
 
 
 if __name__ == '__main__':
-    plotter = PricePlotter('BTC')
+    plotter = PricePlotter('BTC', 50)

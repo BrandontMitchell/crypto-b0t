@@ -1,6 +1,6 @@
 import pandas as pd 
 import requests
-import matplotlib.pyplot as pt
+import matplotlib.pyplot as plt
 import datetime
 import json
 
@@ -27,16 +27,19 @@ class PricePlotter():
         start = f'{start.year:#02d}-{start.month:#02}-{start.day:#02}'
         end = f'{end.year:#02}-{end.month:#02d}-{end.day:#02d}'
         url = f'{self.baseURL}historical/close.json?currency={coin}&start={start}&end={end}'
-        print(url)
         r = requests.get(url).json()['bpi']
 
-
-        print(r)
         prices = r.values()
         dates = r.keys()
         print(prices)
         print(dates)
-        # print(data_dict)
+
+        lists = sorted(r.items())
+        x, y = zip(*lists)
+        plt.plot(x,y)
+        plt.ylabel('Price (USD)')
+        plt.xlabel('Time')
+        plt.show() 
         
 
 

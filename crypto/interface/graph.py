@@ -4,6 +4,8 @@ import matplotlib.pyplot as pt
 import datetime
 import json
 
+# https://www.coindesk.com/api
+# https://github.com/L1Cafe/Coindesk-Python-API-client/blob/master/coindesk/client.py
 
 class PricePlotter():
     """

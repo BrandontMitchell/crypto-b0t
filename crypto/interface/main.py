@@ -6,15 +6,21 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
         QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
         QSlider, QSpinBox, QStyleFactory, QTableWidget, QTabWidget, QTextEdit,
         QVBoxLayout, QWidget)
+# from matplotlib.backends.qt_compat import QtCore, QtWidets
+from matplotlib.backends.backend_qt5agg import FigureCanvas
+from matplotlib.figure import Figure
 import sys
 import requests
 import matplotlib
+from graph import PricePlotter
 
 class Main(QWidget):
     
     def __init__(self, parent=None):
         super().__init__()
         self.initUI()
+        # self.graphBTC = PricePlotter('BTC', 50)
+
 
     def initUI(self):
         self.title = 'Crypto B0t'
@@ -63,6 +69,8 @@ class Main(QWidget):
         middleLeft = QVBoxLayout()
         middleLeft.setContentsMargins(50, 50, 50, 50)
         middleLeft.addWidget(graph_label)
+        # self.plotWidget = FigureCanvas(Figure(self.graphBTC))
+        # middleLeft.addWidget(self.plotWidget)
         middleLeft.addStretch(1)
         self.graphBox.setLayout(middleLeft)
         
@@ -100,7 +108,10 @@ class Main(QWidget):
         '''
             live bitcoin tracking
         '''
-        pass
+        
+        
+
+
 
     
 

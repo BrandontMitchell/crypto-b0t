@@ -1,4 +1,5 @@
 import pandas as pd 
+import numpy as np
 import requests
 import matplotlib.pyplot as plt
 import datetime
@@ -7,7 +8,7 @@ import json
 # https://www.coindesk.com/api
 # https://github.com/L1Cafe/Coindesk-Python-API-client/blob/master/coindesk/client.py
 
-class PricePlotter():
+class PricePlotter:
     """
     Get current price, and historical data for specified coin. This class will plot that data
     """
@@ -39,6 +40,7 @@ class PricePlotter():
         lists = sorted(r.items())
         x, y = zip(*lists)
 
+        plt.plot(x,y)
         plt.ylabel('Price (USD)')
         plt.xlabel('Time')
         plt.title(f'{coin} price timeline')
@@ -46,5 +48,5 @@ class PricePlotter():
         
 
 
-if __name__ == '__main__':
-    plotter = PricePlotter('BTC', 50)
+# if __name__ == '__main__':
+#     plotter = PricePlotter('BTC', 50)

@@ -45,17 +45,19 @@ class PlotCanvas(FigureCanvas):
         url = f'{self.baseURL}historical/close.json?currency={coin}&start={start}&end={end}'
         r = requests.get(url).json()['bpi']
 
+        # dates and prices in list format (originally in dict keys and values)
         dates = [x for x in chain(r) if x]
-        print(dates)
         prices = [x for x in chain(r.values()) if x]
-        print(prices)
 
+        # identify max positions/values
         price_max = max(prices)
         date_pos = prices.index(price_max)
         date_max = dates[date_pos]
 
+        # identify min positions/values
         price_min = min(prices)
-        date_min = prices.index(price_min)
+        date_min_pos = prices.index(price_min)
+        date_min = dates[date_min_pos]
 
         self.figure.clear()
         ax = self.figure.add_subplot(111)
@@ -66,8 +68,11 @@ class PlotCanvas(FigureCanvas):
         line, = ax.plot(x, y)
         ax.plot(x,y, 'tab:blue')
         ax.set_title('BTC Tracker')
-        ax.annotate(f'local high of {price_max} on {date_max}', xy=(date_max, price_max), xytext=(date_max, price_max+5000),
+        ax.annotate(f'local max of {price_max} on {date_max}', xy=(date_max, price_max), xytext=(date_max, price_max+5000),
                     arrowprops=dict(facecolor='green', shrink=0.05),
+                    )
+        ax.annotate(f'local min of {price_min} on {date_min}', xy=(date_min, price_min), xytext=(date_min, price_min-5000),
+                    arrowprops=dict(facecolor='red', shrink=0.05),
                     )
         ax.set_ylim(0, 20_000)
         self.draw()

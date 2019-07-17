@@ -36,8 +36,7 @@ class Main(QWidget):
         self.width = 2100
         self.height = 1400
 
-        graph = PlotCanvas(self, width=5, height=4)
-        graph.move(0,0)
+        self.graph = PlotCanvas(self, width=5, height=4)
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
@@ -73,20 +72,13 @@ class Main(QWidget):
 
     def createGraph(self):
         self.graphBox = QGroupBox("Graph")
-        graph_label = QLabel("Graphs")
-        graph_label.setGeometry(QRect(0, 0, 100, 700))
         middleLeft = QVBoxLayout()
-        middleLeft.setContentsMargins(50, 50, 50, 50)
-        middleLeft.addWidget(graph_label)
-        # self.plotWidget = FigureCanvas(Figure(self.graphBTC))
-        # middleLeft.addWidget(self.plotWidget)
-        middleLeft.addStretch(1)
+        middleLeft.addWidget(self.graph)
         self.graphBox.setLayout(middleLeft)
         
     
     def createMetrics(self):
         self.metricsBox = QGroupBox("Metrics")
-
         transaction_log = QLabel("Transaction Log")
         transaction_log.setGeometry(QRect(0, 0, 400, 700))
         middleRight = QVBoxLayout()
@@ -95,13 +87,11 @@ class Main(QWidget):
 
     def createSettings(self): 
         self.settingsBox = QGroupBox("Settings")
-
         setting_label = QLabel("Setting")
         setting_label.setGeometry(QRect(0, 0, 2000, 200))
         
         lowerMiddle = QHBoxLayout()
         lowerMiddle.addWidget(setting_label)
-
         self.settingsBox.setLayout(lowerMiddle)
 
 

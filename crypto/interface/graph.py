@@ -4,6 +4,7 @@ from PyQt5.QtGui import QIcon
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
+from itertools import chain
 import requests
 import datetime
 import json
@@ -23,9 +24,6 @@ class PlotCanvas(FigureCanvas):
                                    QSizePolicy.Expanding,\
                                    QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
-        self.plot()
-
-    def plot(self):
         self.bitcoinTrack('btc', 50)
 
     def bitcoinTrack(self, coin, time):
@@ -47,10 +45,17 @@ class PlotCanvas(FigureCanvas):
         url = f'{self.baseURL}historical/close.json?currency={coin}&start={start}&end={end}'
         r = requests.get(url).json()['bpi']
 
-        # prices = r.values()
-        # dates = r.keys()
-        # print(prices)
-        # print(dates)
+        dates = [x for x in chain(r) if x]
+        print(dates)
+        prices = [x for x in chain(r.values()) if x]
+        print(prices)
+
+        price_max = max(prices)
+        date_pos = prices.index(price_max)
+        date_max = dates[date_pos]
+
+        price_min = min(prices)
+        date_min = prices.index(price_min)
 
         self.figure.clear()
         ax = self.figure.add_subplot(111)
@@ -58,11 +63,11 @@ class PlotCanvas(FigureCanvas):
         lists = sorted(r.items())
         x, y = zip(*lists)
 
-        ax.plot(x,y)
+        line, = ax.plot(x, y)
+        ax.plot(x,y, 'tab:blue')
         ax.set_title('BTC Tracker')
+        ax.annotate(f'local high of {price_max} on {date_max}', xy=(date_max, price_max), xytext=(date_max, price_max+5000),
+                    arrowprops=dict(facecolor='green', shrink=0.05),
+                    )
+        ax.set_ylim(0, 20_000)
         self.draw()
-        # ax.ylabel('Price (USD)')
-        # ax.xlabel('Time')
-        # ax.title(f'{coin} price timeline')
-        # self.figure.show()
-        # self.canvas.draw()

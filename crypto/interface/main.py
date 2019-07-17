@@ -36,7 +36,7 @@ class Main(QWidget):
         self.width = 2100
         self.height = 1400
 
-        self.graph = PlotCanvas(self, width=5, height=4)
+        self.graph = PlotCanvas(self)
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)

@@ -5,19 +5,26 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
         QDial, QDialog, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLineEdit,
         QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
         QSlider, QSpinBox, QStyleFactory, QTableWidget, QTabWidget, QTextEdit,
-        QVBoxLayout, QWidget)
+        QVBoxLayout, QWidget, QMessageBox)
+
 # from matplotlib.backends.qt_compat import QtCore, QtWidets
-from matplotlib.backends.backend_qt5agg import FigureCanvas
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 import sys
 import requests
 import matplotlib
-from graph import PricePlotter
+import datetime
+import time
+from graph import PlotCanvas
 
 class Main(QWidget):
     
     def __init__(self, parent=None):
         super().__init__()
+        self.figure = plt.figure()
+        self.canvas = FigureCanvas(self.figure)
         self.initUI()
         # self.graphBTC = PricePlotter('BTC', 50)
 
@@ -29,6 +36,8 @@ class Main(QWidget):
         self.width = 2100
         self.height = 1400
 
+        graph = PlotCanvas(self, width=5, height=4)
+        graph.move(0,0)
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
@@ -42,7 +51,7 @@ class Main(QWidget):
         self.createFooter()
 
         logo = QLabel("Crypto B0t")
-        sign_in_btn = QPushButton("Sign In")
+        sign_in_btn = QPushButton("Show graph") # press to graph bitcoin
         sign_in_btn.setGeometry(QRect(0, 0, 50, 100))
         sign_up_btn = QPushButton("Sign Up")
         topLayout = QHBoxLayout()
@@ -104,11 +113,8 @@ class Main(QWidget):
 
         self.footerBox.setLayout(lower)
 
-    def bitcoinTrack(self):
-        '''
-            live bitcoin tracking
-        '''
-        
+
+
         
 
 
@@ -118,4 +124,5 @@ class Main(QWidget):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     bot = Main()
+    bot.show()
     sys.exit(app.exec_())

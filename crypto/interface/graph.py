@@ -32,6 +32,7 @@ class PlotCanvas(FigureCanvas):
         '''
         self.baseURL = 'https://api.coindesk.com/v1/bpi/'
         self.today = datetime.date.today()
+        print(self.today)
         self.historical_date = datetime.date.today()-datetime.timedelta(days=time)
         self.coin = 'btc'
         self.get_historical_data(self.coin, self.historical_date, self.today) 
@@ -59,20 +60,30 @@ class PlotCanvas(FigureCanvas):
         date_min_pos = prices.index(price_min)
         date_min = dates[date_min_pos]
 
+        # add plot to axis
         self.figure.clear()
         ax = self.figure.add_subplot(111)
 
+        # sort and compress data to plottable format
         lists = sorted(r.items())
         x, y = zip(*lists)
-
         line, = ax.plot(x, y)
+
+        # graph visuals
         ax.plot(x,y, 'tab:blue')
         ax.set_title('BTC Tracker')
-        ax.annotate(f'local max of {price_max} on {date_max}', xy=(date_max, price_max), xytext=(date_max, price_max+5000),
+
+        # add arrows for high, low, and current price
+        ax.annotate(f'Local Max of{price_max} on {date_max}', xy=(date_max, price_max), xytext=(date_max, price_max+5000),
                     arrowprops=dict(facecolor='green', shrink=0.05),
                     )
-        ax.annotate(f'local min of {price_min} on {date_min}', xy=(date_min, price_min), xytext=(date_min, price_min-5000),
+        ax.annotate(f'Local Min of {price_min} on {date_min}', xy=(date_min, price_min), xytext=(date_min, price_min-5000),
                     arrowprops=dict(facecolor='red', shrink=0.05),
                     )
+        ax.annotate(f'Current Price: {prices[-1]}}', xy=(dates[-1], prices[-1]), xytext=(dates[-20], prices[-1]+5000),
+                    arrowprops=dict(facecolor='blue', shrink=0.05),
+                    )
         ax.set_ylim(0, 20_000)
+
+
         self.draw()

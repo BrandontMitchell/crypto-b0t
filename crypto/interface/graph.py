@@ -1,5 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QVBoxLayout, QSizePolicy, QMessageBox, QWidget, \
-    QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QVBoxLayout, QSizePolicy, QMessageBox, QWidget, QPushButton
 from PyQt5.QtGui import QIcon
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -67,7 +66,6 @@ class PlotCanvas(FigureCanvas):
         # sort and compress data to plottable format
         lists = sorted(r.items())
         x, y = zip(*lists)
-        line, = ax.plot(x, y)
 
         # graph visuals
         ax.plot(x,y, 'tab:blue')
@@ -80,8 +78,8 @@ class PlotCanvas(FigureCanvas):
         ax.annotate(f'Local Min of {price_min} on {date_min}', xy=(date_min, price_min), xytext=(date_min, price_min-5000),
                     arrowprops=dict(facecolor='red', shrink=0.05),
                     )
-        ax.annotate(f'Current Price: {prices[-1]}}', xy=(dates[-1], prices[-1]), xytext=(dates[-20], prices[-1]+5000),
-                    arrowprops=dict(facecolor='blue', shrink=0.05),
+        ax.annotate(f'Current Price: {prices[-1]}', xy=(dates[-1], prices[-1]), xytext=(dates[-20], prices[-1]-5000),
+                    arrowprops=dict(facecolor='blue', shrink=0.15),
                     )
         ax.set_ylim(0, 20_000)
 

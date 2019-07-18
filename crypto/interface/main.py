@@ -43,7 +43,6 @@ class Main(QWidget):
         self.show()
 
     def layout(self):
-
         self.createGraph()
         self.createMetrics()
         self.createSettings()
@@ -100,7 +99,6 @@ class Main(QWidget):
         footer_label = QLabel("@htb 2019")
         lower = QVBoxLayout()
         lower.addWidget(footer_label)
-
         self.footerBox.setLayout(lower)
 
 

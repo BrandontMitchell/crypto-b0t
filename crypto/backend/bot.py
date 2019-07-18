@@ -59,13 +59,13 @@ class Bot:
         '''
         pass
 
-    def pullPrice(self, symbol):
+    def pullPrice(self, coin):
         '''
         gathers BTC price for last _____ (interval of time)
         '''
         self.balance = self.exchange.fetch_balance()
 
-        for ticker in self.exchange.fetch_tickers(symbol):
+        for ticker in self.exchange.fetch_tickers(coin):
             time.sleep(self.exchange.rateLimit / 1000)
             resp = self.exchange.fetch_ohlcv(ticker, '1d')
             # print(resp)
@@ -77,6 +77,19 @@ class Bot:
         #     if trade['side'] == 'buy':
         #         print(trade['price'])
         #         print(trade['amount'])
+
+    def get_current_data(self, coin):
+        '''
+        gathers current data
+        :type: coin --> string referencing specific crypto i.e. 'btc'
+        :rtype: current_price --> int 
+        :rtype: current_vol --> int
+        :rtype: 
+        '''
+
+        current_price = resp['USD']['rate']
+        current_mcap = ''
+        current_supp = ''
 
 if __name__ == '__main__':
     bot = Bot()

@@ -11,6 +11,7 @@ import json
 # https://www.coindesk.com/api
 # https://github.com/L1Cafe/Coindesk-Python-API-client/blob/master/coindesk/client.py
 
+
 class PlotCanvas(FigureCanvas):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
@@ -19,8 +20,8 @@ class PlotCanvas(FigureCanvas):
         FigureCanvas.__init__(self, fig)
         self.setParent(parent)
 
-        FigureCanvas.setSizePolicy(self,\
-                                   QSizePolicy.Expanding,\
+        FigureCanvas.setSizePolicy(self,
+                                   QSizePolicy.Expanding,
                                    QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
         self.bitcoinTrack('btc', 50)
@@ -34,8 +35,9 @@ class PlotCanvas(FigureCanvas):
         print(self.today)
         self.historical_date = datetime.date.today()-datetime.timedelta(days=time)
         self.coin = 'btc'
-        self.get_historical_data(self.coin, self.historical_date, self.today) 
-    
+        self.get_historical_data(self.coin, self.historical_date, self.today)
+        self.get_current_data('btc')
+
     def get_historical_data(self, coin, start, end):
         '''
         gathers historical data with given currency, start, end
@@ -68,7 +70,7 @@ class PlotCanvas(FigureCanvas):
         x, y = zip(*lists)
 
         # graph visuals
-        ax.plot(x,y, 'tab:blue')
+        ax.plot(x, y, 'tab:blue')
         ax.set_title('BTC Tracker')
 
         # add arrows for high, low, and current price
@@ -83,5 +85,8 @@ class PlotCanvas(FigureCanvas):
                     )
         ax.set_ylim(0, 20_000)
 
-
         self.draw()
+
+    
+
+

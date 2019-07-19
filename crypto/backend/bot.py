@@ -53,16 +53,16 @@ class Bot:
 # order = exchange.create_order(symbol, type, side, amount)
 # print(order)
 
-
+# TODO:
 #   FILTERS THE DATA MUST PASS BEFORE BUYING:
 #       1. There is a negative to positive slope at time of buy
 #       2. Buying will be below the previous sold price
-#       3. Price will be below weekly average
+#       3. Price will be below weekly average       !!!! Nearly Done !!!!
 
 #   FILTERS THE DATA MUST PASS BEFORE SELLING:
 #       1. There is a positive to negative slope at time of sale
 #       2. Price is above bought price (>1%)
-#       3. Price will be above weekly average
+#       3. Price will be above weekly average       !!!! Nearly Done !!!!
 
 
     def boughtPrice(self):

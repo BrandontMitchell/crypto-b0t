@@ -84,6 +84,7 @@ class Bot:
         :type: data --> dataframe of most recent trades? (last 5 or so)
         :rtype: slope --> float (positive means U shape, negative means n shape)
         '''
+        pass
 
 # print(exchange.load_markets)
 # print(exchange.symbols)

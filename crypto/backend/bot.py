@@ -23,10 +23,7 @@ class Bot:
         with open("crypto.conf") as f:
             lines = f.readlines()
             key = lines[0].strip()
-            secret = lines[1].strip()
-            print(key)
-            print(secret)
-            
+            secret = lines[1].strip()            
 
         self.exchange_id = 'binance'
         self.exchange_class = getattr(ccxt, self.exchange_id)
@@ -39,11 +36,11 @@ class Bot:
         self.exchange.fetch_balance()    
         self.exchange.fetch_trades('USDC/BTC')
 
-    def boughtPrice(self):
+    def purchase_price(self, price):
         '''
         hold variable for initial buy price
         '''
-        pass
+        return price 
 
     def weekly_average(self, coin):
         '''
@@ -57,8 +54,6 @@ class Bot:
             time.sleep(self.exchange.rateLimit / 1000)
             resp = self.exchange.fetch_ohlcv(ticker, '1m')
             df = pd.DataFrame(resp, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
-            df.style.hide_index()
-            print(df)
 
             week_avg = df.tail(7)['close'].mean()
             self.get_current_data(df)
@@ -82,6 +77,13 @@ class Bot:
         print(data.tail(1)['close'])
         print(f'Current Price: {current_price}')
         print(f'Current Volumne: {current_vol}')
+
+    def get_market_slope(self, data):
+        '''
+        gathers current market slope
+        :type: data --> dataframe of most recent trades? (last 5 or so)
+        :rtype: slope --> float (positive means U shape, negative means n shape)
+        '''
 
 # print(exchange.load_markets)
 # print(exchange.symbols)
@@ -114,4 +116,3 @@ class Bot:
 if __name__ == '__main__':
     bot = Bot()
     bot.weekly_average('BTC/USDC')
-    print('done')

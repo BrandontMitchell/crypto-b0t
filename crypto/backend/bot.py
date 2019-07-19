@@ -53,25 +53,40 @@ class Bot:
 # order = exchange.create_order(symbol, type, side, amount)
 # print(order)
 
+
+#   FILTERS THE DATA MUST PASS BEFORE BUYING:
+#       1. There is a negative to positive slope at time of buy
+#       2. Buying will be below the previous sold price
+#       3. Price will be below weekly average
+
+#   FILTERS THE DATA MUST PASS BEFORE SELLING:
+#       1. There is a positive to negative slope at time of sale
+#       2. Price is above bought price (>1%)
+#       3. Price will be above weekly average
+
+
     def boughtPrice(self):
         '''
         hold variable for initial buy price
         '''
         pass
 
-    def pullPrice(self, coin):
+    def weeklyAvg(self, coin):
         '''
-        gathers BTC price for last _____ (interval of time)
+        gathers market data, displays a dataframe including date, open, high, low, close, and volume.
+        from this we gather the weekly price average (a filter for buying and selling)
         '''
         self.balance = self.exchange.fetch_balance()
 
+        # iterate through tickers related to the coin and construct dataframe around data
         for ticker in self.exchange.fetch_tickers(coin):
             time.sleep(self.exchange.rateLimit / 1000)
             resp = self.exchange.fetch_ohlcv(ticker, '1d')
-            # print(resp)
-            
             df = pd.DataFrame(resp, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
             print(df)
+
+            week_avg = df.tail(7)['close'].mean()
+            print(week_avg)
 
         # for trade in exchange.fetch_trades('USDC/BTC', since=):
         #     if trade['side'] == 'buy':
@@ -87,11 +102,11 @@ class Bot:
         :rtype: 
         '''
 
-        current_price = resp['USD']['rate']
+        # current_price = resp['USD']['rate']
         current_mcap = ''
         current_supp = ''
 
 if __name__ == '__main__':
     bot = Bot()
-    bot.pullPrice('BTC/USDC')
+    bot.weeklyAvg('BTC/USDC')
     print('done')

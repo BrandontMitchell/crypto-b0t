@@ -80,12 +80,13 @@ class Main(QWidget):
         self.metricsBox = QGroupBox("Metrics")
         middleRight = QVBoxLayout()
 
+        # gather current market data
         self.current_price = QLabel("Current Price: " + str(data[0]))
         self.current_vol = QLabel("Current Volume: " + str(data[1]))
         self.last_trade = QLabel("Last Traded Price: " + str(data[2]))
         self.last_trade_share = QLabel("Last Trade Quantity: " + str(data[3]))
 
-
+        # gather user values (some won't be necessary)
         self.time_label = QLabel("Enter # of days to graph: ")
         self.time_box = QLineEdit(self)
         self.coin_selling_lb = QLabel("Enter the coin to sell: ")
@@ -105,14 +106,7 @@ class Main(QWidget):
         self.risk.setSingleStep(1)
         self.submit = QPushButton("Submit Values")
 
-
-
-        # self.box_6 = QLineEdit(self)
-        # self.boxlabel7 = QLabel("Test label 7")
-        # self.box_7 = QLineEdit(self)
-        # self.boxlabel8 = QLabel("Test label 8")
-        # self.box_8 = QLineEdit(self)
-
+        # add labels and buttons to right middle box
         middleRight.addWidget(self.current_price)
         middleRight.addWidget(self.current_vol)
         middleRight.addWidget(self.last_trade)
@@ -130,13 +124,8 @@ class Main(QWidget):
         middleRight.addWidget(self.risk_lb)
         middleRight.addWidget(self.risk)
         middleRight.addWidget(self.submit)
-        # middleRight.addWidget(self.boxlabel6)
-        # middleRight.addWidget(self.box_6)
-        # middleRight.addWidget(self.boxlabel7)
-        # middleRight.addWidget(self.box_7)
-        # middleRight.addWidget(self.boxlabel8)
-        # middleRight.addWidget(self.box_8)
 
+        # set layout to add the middle right box
         self.metricsBox.setLayout(middleRight)
 
     def createSettings(self): 

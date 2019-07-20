@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import *
-from PyQt5.QtCore import QRect
+from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
         QDial, QDialog, QGridLayout, QGroupBox, QHBoxLayout, QLabel, QLineEdit,
         QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
@@ -44,13 +44,13 @@ class Main(QWidget):
 
     def layout(self):
         self.createGraph()
-        self.createMetrics()
+        self.createMetrics([10_232, 23, 352, 234])
         self.createSettings()
         self.createFooter()
 
         logo = QLabel("Crypto B0t")
         sign_in_btn = QPushButton("Show graph") # press to graph bitcoin
-        sign_in_btn.setGeometry(QRect(0, 0, 50, 100))
+        sign_in_btn.setGeometry(QRect(0, 0, 50, 50))
         sign_up_btn = QPushButton("Sign Up")
         topLayout = QHBoxLayout()
         topLayout.addWidget(logo)
@@ -76,13 +76,68 @@ class Main(QWidget):
         self.graphBox.setLayout(middleLeft)
         
     
-    def createMetrics(self):
+    def createMetrics(self, data):
         self.metricsBox = QGroupBox("Metrics")
-        transaction_log = QLabel("Transaction Log")
-        transaction_log.setGeometry(QRect(0, 0, 400, 700))
         middleRight = QVBoxLayout()
-        middleRight.addWidget(transaction_log)
-        self.graphBox.setLayout(middleRight)
+
+        self.current_price = QLabel("Current Price: " + str(data[0]))
+        self.current_vol = QLabel("Current Volume: " + str(data[1]))
+        self.last_trade = QLabel("Last Traded Price: " + str(data[2]))
+        self.last_trade_share = QLabel("Last Trade Quantity: " + str(data[3]))
+
+
+        self.time_label = QLabel("Enter # of days to graph: ")
+        self.time_box = QLineEdit(self)
+        self.coin_selling_lb = QLabel("Enter the coin to sell: ")
+        self.coin_selling = QLineEdit(self)
+        self.coin_buying_lb = QLabel("Enter the coin to buy: ")
+        self.coin_buying = QLineEdit(self)
+        self.lowest_price_lb = QLabel("Enter lowest price to sell at: ")
+        self.lowest_price = QLineEdit(self)
+        self.highest_price_lb = QLabel("Enter highest price to sell at: ")
+        self.highest_price = QLineEdit(self)
+        self.risk = QSlider(Qt.Horizontal)
+        self.risk.setValue(self.risk.value())
+        self.risk_lb = QLabel("Enter risk factor: ")
+        self.risk.setFocusPolicy(Qt.StrongFocus)
+        self.risk.setTickPosition(QSlider.TicksBothSides)
+        self.risk.setTickInterval(10)
+        self.risk.setSingleStep(1)
+        self.submit = QPushButton("Submit Values")
+
+
+
+        # self.box_6 = QLineEdit(self)
+        # self.boxlabel7 = QLabel("Test label 7")
+        # self.box_7 = QLineEdit(self)
+        # self.boxlabel8 = QLabel("Test label 8")
+        # self.box_8 = QLineEdit(self)
+
+        middleRight.addWidget(self.current_price)
+        middleRight.addWidget(self.current_vol)
+        middleRight.addWidget(self.last_trade)
+        middleRight.addWidget(self.last_trade_share)
+        middleRight.addWidget(self.time_label)
+        middleRight.addWidget(self.time_box)
+        middleRight.addWidget(self.coin_selling_lb)
+        middleRight.addWidget(self.coin_selling)
+        middleRight.addWidget(self.coin_buying_lb)
+        middleRight.addWidget(self.coin_buying)
+        middleRight.addWidget(self.lowest_price_lb)
+        middleRight.addWidget(self.lowest_price)
+        middleRight.addWidget(self.highest_price_lb)
+        middleRight.addWidget(self.highest_price)
+        middleRight.addWidget(self.risk_lb)
+        middleRight.addWidget(self.risk)
+        middleRight.addWidget(self.submit)
+        # middleRight.addWidget(self.boxlabel6)
+        # middleRight.addWidget(self.box_6)
+        # middleRight.addWidget(self.boxlabel7)
+        # middleRight.addWidget(self.box_7)
+        # middleRight.addWidget(self.boxlabel8)
+        # middleRight.addWidget(self.box_8)
+
+        self.metricsBox.setLayout(middleRight)
 
     def createSettings(self): 
         self.settingsBox = QGroupBox("Settings")

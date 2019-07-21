@@ -5,12 +5,12 @@ import pandas as pd
 
 # TODO:
 #   FILTERS THE DATA MUST PASS BEFORE BUYING:
-#       1. There is a negative to positive slope at time of buy
+#       1. There is a negative to positive slope at time of buy     !!!! Nearly Done !!!!
 #       2. Buying will be below the previous sold price
 #       3. Price will be below weekly average       !!!! Nearly Done !!!!
 
 #   FILTERS THE DATA MUST PASS BEFORE SELLING:
-#       1. There is a positive to negative slope at time of sale
+#       1. There is a positive to negative slope at time of sale    !!!! Nearly Done !!!!
 #       2. Price is above bought price (>1%)
 #       3. Price will be above weekly average       !!!! Nearly Done !!!!
 
@@ -95,12 +95,8 @@ class Bot:
         # -60 iloc will result in an hour ago's price/date
         prev_price = df.iloc[-60]['close']
         prev_date = df.iloc[-60]['date']
-
         curr_price = df.iloc[-1]['close']
         curr_date = df.iloc[-1]['date']
-
-        print(prev_price, prev_date)
-        print(curr_price, curr_date)
 
         slope = ((curr_price-prev_price)/(curr_date-prev_date))
         slope_pos = False
@@ -110,7 +106,11 @@ class Bot:
         return slope 
 
 
-
+    def execute_purchase(self):
+        '''
+        checks all three filters, and makes a decision to hold or buy
+        '''
+        pass
 
 # EXAMPLE ON MARKET ORDER
 

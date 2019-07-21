@@ -86,16 +86,6 @@ class Bot:
         '''
         pass
 
-# print(exchange.load_markets)
-# print(exchange.symbols)
-# orders = exchange.fetch_order_book(exchange.symbols[0])
-# print(f' orders -- {orders}')
-# print(orders['bids'][0][0])
-# print(binance.has['fetchTicker'])
-# print(binance.fetch_ticker('BTC/USDC'))
-# # print(binance.fetch_ticker('BTC/USDC')['weightedAvgPrice'])
-
-
 
 
 # EXAMPLE ON MARKET ORDER

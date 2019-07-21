@@ -57,6 +57,7 @@ class Bot:
 
             week_avg = df.tail(7)['close'].mean()
             self.get_current_data(df)
+            self.get_market_slope(df)
 
         # for trade in exchange.fetch_trades('USDC/BTC', since=):
         #     if trade['side'] == 'buy':
@@ -71,20 +72,25 @@ class Bot:
         :rtype: current_vol --> int
         :rtype: 
         '''
-        current_price = float(str(data.tail(1)['close'])[7:15])
-        current_vol = float(str(data.tail(1)['volume'])[7:15])
-        current_supp = ''
-        print(data.tail(1)['close'])
-        print(f'Current Price: {current_price}')
-        print(f'Current Volumne: {current_vol}')
+        try: 
 
+            current_price = float(str(data.tail(1)['close'])[7:15])
+            current_vol = float(str(data.tail(1)['volume'])[7:14])
+            current_supp = ''
+            print(data.tail(1)['close'])
+            print(f'Current Price: {current_price}')
+            print(f'Current Volumne: {current_vol}')
+        except:
+            pass 
     def get_market_slope(self, data):
         '''
         gathers current market slope
         :type: data --> dataframe of most recent trades? (last 5 or so)
         :rtype: slope --> float (positive means U shape, negative means n shape)
         '''
-        pass
+        df = data[['close', 'date']]
+
+        print(df)
 
 
 

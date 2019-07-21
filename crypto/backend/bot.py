@@ -59,11 +59,6 @@ class Bot:
             self.get_current_data(df)
             self.get_market_slope(df)
 
-        # for trade in exchange.fetch_trades('USDC/BTC', since=):
-        #     if trade['side'] == 'buy':
-        #         print(trade['price'])
-        #         print(trade['amount'])
-
     def get_current_data(self, data):
         '''
         gathers current data

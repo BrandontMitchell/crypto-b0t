@@ -36,7 +36,6 @@ class PlotCanvas(FigureCanvas):
         self.historical_date = datetime.date.today()-datetime.timedelta(days=time)
         self.coin = 'btc'
         self.get_historical_data(self.coin, self.historical_date, self.today)
-        # self.get_current_data('btc')
 
     def get_historical_data(self, coin, start, end):
         '''

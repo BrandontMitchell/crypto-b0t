@@ -90,13 +90,24 @@ class Bot:
         '''
         df = data[['close', 'date']]
         df = df.tail(2)
-
-        prev_price = df.iloc[-2][6:13]
-        # curr_price = df.iloc[[-1],['close']][6:13]
-
-        print(prev_price)
-
         print(df)
+
+        prev_price = df.iloc[-2]['close']
+        prev_date = df.iloc[-2]['date']
+
+        curr_price = df.iloc[-1]['close']
+        curr_date = df.iloc[-1]['date']
+
+        print(prev_price, prev_date)
+        print(curr_price, curr_date)
+
+        slope = ((curr_price-prev_price)/(curr_date-prev_date))
+        slope_pos = False
+        if slope > 0: slope_pos = True
+        print(f'slope: {slope}, positive is {slope_pos}')
+        
+        return slope 
+
 
 
 

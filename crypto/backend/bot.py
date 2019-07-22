@@ -101,25 +101,26 @@ class Bot:
         return slope 
 
 
-    def execute_purchase(self):
+    def execute_purchase(self, coin, data):
         '''
         checks all three filters, and makes a decision to hold or buy
         '''
-        pass
+        symbol = 'USDC/BTC'
+        type = 'market'
+        side = 'buy'
+        amount = 50
+        price = 0.40 
+        params = {
+            'test': True
+        }
+
+        order = exchange.create_order(symbol, type, side, amount)
+        print(order)
+        
 
 # EXAMPLE ON MARKET ORDER
 
-# symbol = 'XRP/BTC'
-# type = 'market'
-# side = 'sell'
-# amount = 50
-# price = 0.40 
-# params = {
-#     'test': True
-# }
 
-# order = exchange.create_order(symbol, type, side, amount)
-# print(order)
 
 
 

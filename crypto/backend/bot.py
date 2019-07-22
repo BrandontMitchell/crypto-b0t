@@ -75,6 +75,7 @@ class Bot:
             print(data.tail(1)['close'])
             print(f'Current Price: {current_price}')
             print(f'Current Volumne: {current_vol}')
+            return current_price
         except:
             pass 
     def get_market_slope(self, data):
@@ -114,11 +115,20 @@ class Bot:
             'test': True
         }
 
-        order = exchange.create_order(symbol, type, side, amount)
-        print(order)
+        if self.get_market_slope(data) and (self.get_current_data(data) > self.weekly_average(coin)) and ((price + price*0.01) < self.purchase_price(price)):
+            order = self.exchange.create_order(symbol, type, side, amount)
+            print(order)    
+        
+        else:
+            return f'Filters failed, retrying...'
+
+
+    def main(self):
+        '''
+        main function
+        '''
         
 
-# EXAMPLE ON MARKET ORDER
 
 
 

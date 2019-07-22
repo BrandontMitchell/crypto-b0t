@@ -13,6 +13,7 @@ import pandas as pd
 #       1. There is a positive to negative slope at time of sale    !!!! Nearly Done !!!!
 #       2. Price is above bought price (>1%)
 #       3. Price will be above weekly average       !!!! Nearly Done !!!!
+#   NEED TO ADD SELLING FUNCTION
 
 class Bot:
 
@@ -109,7 +110,7 @@ class Bot:
         symbol = 'USDC/BTC'
         type = 'market'
         side = 'buy'
-        amount = 50
+        amount = 0.001
         price = 0.40 
         params = {
             'test': True
@@ -127,7 +128,12 @@ class Bot:
         '''
         main function
         '''
-        
+        pass 
+        #TODO:
+            #get data
+            #execute purhcase
+            #setup in interval and run forever unless user breaks
+
 
 
 

@@ -56,11 +56,7 @@ class Bot:
             time.sleep(self.exchange.rateLimit / 1000)
             resp = self.exchange.fetch_ohlcv(ticker, '1m')
             df = pd.DataFrame(resp, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
-
-            # week_avg = df.tail(7)['close'].mean()
             return df
-            # self.get_current_data(df)
-            # self.get_market_slope(df)
 
     def get_current_data(self, data):
         '''
@@ -74,13 +70,10 @@ class Bot:
             week_avg = data.tail(7)['close'].mean()
             current_price = float(str(data.tail(1)['close'])[7:15])
             current_vol = float(str(data.tail(1)['volume'])[7:14])
-
-            # print(data.tail(1)['close'])
-            # print(f'Current Price: {current_price}')
-            # print(f'Current Volumne: {current_vol}')
             return [current_price, current_vol, week_avg]
         except:
             return f'No data currently available' 
+
     def get_market_slope(self, data):
         '''
         gathers current market slope
@@ -100,7 +93,6 @@ class Bot:
         slope = ((curr_price-prev_price)/(curr_date-prev_date))
         slope_pos = False
         if slope > 0: slope_pos = True
-        print(f'slope: {slope}, positive is {slope_pos}')
 
         return slope 
 
@@ -124,24 +116,3 @@ class Bot:
         
         else:
             return f'Filters failed, retrying...'
-
-
-    def main(self):
-        '''
-        main function
-        '''
-        pass 
-        #TODO:
-            #get data
-            #execute purhcase
-            #setup in interval and run forever unless user breaks
-
-
-
-
-
-
-
-# if __name__ == '__main__':
-#     bot = Bot()
-#     bot.weekly_average('BTC/USDC')

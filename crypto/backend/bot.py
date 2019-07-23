@@ -74,13 +74,13 @@ class Bot:
             week_avg = data.tail(7)['close'].mean()
             current_price = float(str(data.tail(1)['close'])[7:15])
             current_vol = float(str(data.tail(1)['volume'])[7:14])
-            current_supp = ''
-            print(data.tail(1)['close'])
-            print(f'Current Price: {current_price}')
-            print(f'Current Volumne: {current_vol}')
+
+            # print(data.tail(1)['close'])
+            # print(f'Current Price: {current_price}')
+            # print(f'Current Volumne: {current_vol}')
             return [current_price, current_vol, week_avg]
         except:
-            pass 
+            return f'No data currently available' 
     def get_market_slope(self, data):
         '''
         gathers current market slope

@@ -140,6 +140,6 @@ class Bot:
 
 
 
-if __name__ == '__main__':
-    bot = Bot()
-    bot.weekly_average('BTC/USDC')
+# if __name__ == '__main__':
+#     bot = Bot()
+#     bot.weekly_average('BTC/USDC')

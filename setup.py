@@ -16,5 +16,5 @@ setup(
     author_email='btmbaseball99@gmail.com',
     url='https://github.com/BrandontMitchell/crypto-b0t',
     license=license,
-    packages=find_packages(exclude=('tests', 'crypto/bot'))
+    packages=find_packages(exclude=('tests'))
 )

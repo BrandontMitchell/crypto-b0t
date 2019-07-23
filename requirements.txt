@@ -3,5 +3,4 @@ requests
 PyQt5
 ccxt
 datetime
-numpy
 pandas

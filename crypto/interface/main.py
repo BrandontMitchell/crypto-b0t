@@ -30,7 +30,7 @@ class Main(QWidget):
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure)
         self.bot = Bot()
-        self.createData()
+        
         self.initUI()
         # self.graphBTC = PricePlotter('BTC', 50)
 
@@ -43,6 +43,7 @@ class Main(QWidget):
         self.height = 1400
 
         self.graph = PlotCanvas(self)
+        # self.createData()
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
@@ -51,7 +52,7 @@ class Main(QWidget):
 
     def layout(self):
         self.createGraph()
-        self.createMetrics(self.data_arr)
+        self.createMetrics(self.createData())
         self.createSettings()
         self.createFooter()
 
@@ -88,10 +89,16 @@ class Main(QWidget):
         middleRight = QVBoxLayout()
 
         # gather current market data
-        self.current_price = QLabel("Current Price: " + str(data[0]))
+        self.coin_lb = QLabel("Coin Chosen: BTC/USDC")
+        self.current_price = QLabel("Current Price: " + str(self.data_arr[0]))
         self.current_vol = QLabel("Current Volume: " + str(data[1]))
-        self.last_trade = QLabel("Last Traded Price: " + str(data[2]))
-        self.last_trade_share = QLabel("Last Trade Quantity: " + str(data[3]))
+        self.last_trade = QLabel("Weekly Average: " + str(data[2]))
+        self.last_trade_share = QLabel("Current Slope: " + str(data[3]))
+
+        if self.data_arr[3] > 0:
+            self.last_trade_share.setStyleSheet('color: green')
+        else:
+            self.last_trade_share.setStyleSheet('color: red')
 
         # gather user values (some won't be necessary)
         self.time_label = QLabel("Enter # of days to graph: ")

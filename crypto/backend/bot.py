@@ -88,12 +88,12 @@ class Bot:
         :rtype: slope --> float (positive means U shape, negative means n shape)
         '''
         df = data[['close', 'date']]
-        df = df.tail(60)
+        df = df.tail(360)
         print(df)
 
         # -60 iloc will result in an hour ago's price/date
-        prev_price = df.iloc[-60]['close']
-        prev_date = df.iloc[-60]['date']
+        prev_price = df.iloc[-360]['close']
+        prev_date = df.iloc[-360]['date']
         curr_price = df.iloc[-1]['close']
         curr_date = df.iloc[-1]['date']
 

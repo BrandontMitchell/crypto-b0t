@@ -7,6 +7,7 @@ from itertools import chain
 import requests
 import datetime
 import json
+from crypto.backend.bot import Bot
 
 # https://www.coindesk.com/api
 # https://github.com/L1Cafe/Coindesk-Python-API-client/blob/master/coindesk/client.py

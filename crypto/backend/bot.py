@@ -36,6 +36,7 @@ class Bot:
 
         self.exchange.fetch_balance()    
         self.exchange.fetch_trades('USDC/BTC')
+        self.weekly_average('BTC/USDC')
 
     def purchase_price(self, price):
         '''

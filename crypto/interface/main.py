@@ -18,7 +18,7 @@ import matplotlib
 import datetime
 import time
 from crypto.interface.graph import PlotCanvas   # import from top level
-from crypto.backend import bot                  # import from top level
+from crypto.backend.bot import Bot                  # import from top level
 
 # received top level package relative import error, to fix we must run from top level... i.e. ~/Desktop/cbot/crypto-b0t 
 # and type: python3 -m crypto.interface.main
@@ -29,7 +29,7 @@ class Main(QWidget):
         super().__init__()
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure)
-        self.bot = bot
+        self.bot = Bot()
         self.initUI()
         # self.graphBTC = PricePlotter('BTC', 50)
 
@@ -45,6 +45,7 @@ class Main(QWidget):
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
+        self.createData()
         self.show()
 
     def layout(self):
@@ -153,7 +154,7 @@ class Main(QWidget):
 
     def createData(self):
 
-        print(self.bot.weekly_avg('BTC/USDC'))
+        print(self.bot.weekly_average('BTC/USDC'))
         
     
 

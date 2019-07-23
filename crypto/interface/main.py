@@ -30,6 +30,7 @@ class Main(QWidget):
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure)
         self.bot = Bot()
+        self.createData()
         self.initUI()
         # self.graphBTC = PricePlotter('BTC', 50)
 
@@ -45,12 +46,12 @@ class Main(QWidget):
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
-        self.createData()
+        
         self.show()
 
     def layout(self):
         self.createGraph()
-        self.createMetrics([10_232, 23, 352, 234])
+        self.createMetrics(self.data_arr)
         self.createSettings()
         self.createFooter()
 
@@ -153,9 +154,15 @@ class Main(QWidget):
 
 
     def createData(self):
-
-        print(self.bot.weekly_average('BTC/USDC'))
         
+        data = self.bot.weekly_average('BTC/USDC')
+        self.price = self.bot.get_current_data(data)[0]
+        self.vol = self.bot.get_current_data(data)[1]
+        self.week_avg = self.bot.get_current_data(data)[2]
+        self.slope = self.bot.get_market_slope(data)
+
+        self.data_arr = [self.price, self.vol, self.week_avg, self.slope]
+        return self.data_arr
     
 
 

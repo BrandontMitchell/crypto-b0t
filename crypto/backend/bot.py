@@ -57,9 +57,10 @@ class Bot:
             resp = self.exchange.fetch_ohlcv(ticker, '1m')
             df = pd.DataFrame(resp, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
 
-            week_avg = df.tail(7)['close'].mean()
-            self.get_current_data(df)
-            self.get_market_slope(df)
+            # week_avg = df.tail(7)['close'].mean()
+            return df
+            # self.get_current_data(df)
+            # self.get_market_slope(df)
 
     def get_current_data(self, data):
         '''
@@ -70,14 +71,14 @@ class Bot:
         :rtype: 
         '''
         try: 
-
+            week_avg = data.tail(7)['close'].mean()
             current_price = float(str(data.tail(1)['close'])[7:15])
             current_vol = float(str(data.tail(1)['volume'])[7:14])
             current_supp = ''
             print(data.tail(1)['close'])
             print(f'Current Price: {current_price}')
             print(f'Current Volumne: {current_vol}')
-            return current_price
+            return [current_price, current_vol, week_avg]
         except:
             pass 
     def get_market_slope(self, data):

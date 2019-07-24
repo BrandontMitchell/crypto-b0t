@@ -134,7 +134,7 @@ class Main(QWidget):
         middleRight.addWidget(self.risk)
         middleRight.addWidget(self.submit)
 
-        # set layout to add the middle right box
+        # set layout to add the middle right box and stylesheet
         self.metricStyleSheet()
         self.metricsBox.setLayout(middleRight)
 

@@ -91,14 +91,19 @@ class Main(QWidget):
         # gather current market data
         self.coin_lb = QLabel("Coin Chosen: BTC/USDC")
         self.current_price = QLabel("Current Price: " + str(self.data_arr[0]))
-        self.current_vol = QLabel("Current Volume: " + str(data[1]))
-        self.last_trade = QLabel("Weekly Average: " + str(data[2]))
+        self.current_vol = QLabel("Current Volume: " + str(self.data_arr[1]))
+        self.last_trade = QLabel("Weekly Average: " + str(self.data_arr[2]))
         self.last_trade_share = QLabel("Current Slope: " + str(data[3]))
 
         if self.data_arr[3] > 0:
             self.last_trade_share.setStyleSheet('color: green')
         else:
             self.last_trade_share.setStyleSheet('color: red')
+        
+        if self.data_arr[0] > (self.data_arr[2] + self.data_arr[2] * 0.01):
+            self.current_price.setStyleSheet('color: green')
+        else:
+            self.current_price.setStyleSheet('color: red')
 
         # gather user values (some won't be necessary)
         self.time_label = QLabel("Enter # of days to graph: ")

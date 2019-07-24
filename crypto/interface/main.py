@@ -24,15 +24,19 @@ from crypto.backend.bot import Bot                  # import from top level
 # and type: python3 -m crypto.interface.main
 
 class Main(QWidget):
+    '''
+        This is the main class for the crypto bot. cd into the top level package, i.e. crypto-b0t, then run the rest as a python
+        module: `python3 -m crypto.interface.main` for this module to run. 
+
+        
+    '''
     
     def __init__(self, parent=None):
         super().__init__()
         self.figure = plt.figure()
         self.canvas = FigureCanvas(self.figure)
         self.bot = Bot()
-        
         self.initUI()
-        # self.graphBTC = PricePlotter('BTC', 50)
 
 
     def initUI(self):

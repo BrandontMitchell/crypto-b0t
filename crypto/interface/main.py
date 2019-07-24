@@ -43,7 +43,6 @@ class Main(QWidget):
         self.height = 1400
 
         self.graph = PlotCanvas(self)
-        # self.createData()
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
@@ -51,6 +50,7 @@ class Main(QWidget):
         self.show()
 
     def layout(self):
+        
         self.createGraph()
         self.createMetrics(self.createData())
         self.createSettings()

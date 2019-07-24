@@ -28,7 +28,15 @@ class Main(QWidget):
         This is the main class for the crypto bot. cd into the top level package, i.e. crypto-b0t, then run the rest as a python
         module: `python3 -m crypto.interface.main` for this module to run. 
 
-        
+        Upon initializing the main module, the ccxt api will be used with the binance exchange market. We used binance because it
+        is most common in the U.S., and we already had an account there. The exchange can be changed, however data may load differently
+        because of which data is selected and where. 
+
+        The main application is running on PyQt5, with matplotlib for graphing, requests for the graphing api call, and ccxt for the 
+        exchange data.
+
+        Customizability includes how many days to graph, risk factor (how willing are you to take a risk that omits one of our three
+        filters: 1. current price > 1% + weekly average 2. slope is positive, price buying at is lower than previous buy price)
     '''
     
     def __init__(self, parent=None):

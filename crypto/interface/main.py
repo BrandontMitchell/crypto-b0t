@@ -37,6 +37,11 @@ class Main(QWidget):
 
         Customizability includes how many days to graph, risk factor (how willing are you to take a risk that omits one of our three
         filters: 1. current price > 1% + weekly average 2. slope is positive, price buying at is lower than previous buy price)
+
+        TODO:
+            * Add an executing buying feature, should be done in the backend class
+            * Clean up UI, make it prettier
+            
     '''
     
     def __init__(self, parent=None):

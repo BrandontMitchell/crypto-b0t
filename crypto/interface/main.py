@@ -95,16 +95,6 @@ class Main(QWidget):
         self.last_trade = QLabel("Weekly Average: " + str(self.data_arr[2]))
         self.last_trade_share = QLabel("Current Slope: " + str(data[3]))
 
-        if self.data_arr[3] > 0:
-            self.last_trade_share.setStyleSheet('color: green')
-        else:
-            self.last_trade_share.setStyleSheet('color: red')
-        
-        if self.data_arr[0] > (self.data_arr[2] + self.data_arr[2] * 0.01):
-            self.current_price.setStyleSheet('color: green')
-        else:
-            self.current_price.setStyleSheet('color: red')
-
         # gather user values (some won't be necessary)
         self.time_label = QLabel("Enter # of days to graph: ")
         self.time_box = QLineEdit(self)
@@ -145,6 +135,7 @@ class Main(QWidget):
         middleRight.addWidget(self.submit)
 
         # set layout to add the middle right box
+        self.metricStyleSheet()
         self.metricsBox.setLayout(middleRight)
 
     def createSettings(self): 
@@ -176,6 +167,16 @@ class Main(QWidget):
         self.data_arr = [self.price, self.vol, self.week_avg, self.slope]
         return self.data_arr
     
+    def metricStyleSheet(self):
+        if self.data_arr[3] > 0:
+            self.last_trade_share.setStyleSheet('color: green')
+        else:
+            self.last_trade_share.setStyleSheet('color: red')
+        
+        if self.data_arr[0] > (self.data_arr[2] + self.data_arr[2] * 0.01):
+            self.current_price.setStyleSheet('color: green')
+        else:
+            self.current_price.setStyleSheet('color: red')
 
 
     

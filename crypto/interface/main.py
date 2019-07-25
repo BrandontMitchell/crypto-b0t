@@ -17,6 +17,8 @@ import requests
 import matplotlib
 import datetime
 import time
+import qtmodern.styles 
+import qtmodern.windows
 from crypto.interface.graph import PlotCanvas   # import from top level
 from crypto.backend.bot import Bot                  # import from top level
 
@@ -77,7 +79,6 @@ class Main(QWidget):
         logo = QLabel("Crypto B0t")
         sign_in_btn = QPushButton("Show graph") # press to graph bitcoin
         sign_in_btn.setGeometry(QRect(0, 0, 50, 50))
-        sign_in_btn.clicked.connect(self.restartProgram)
         sign_up_btn = QPushButton("Sign Up")
         topLayout = QHBoxLayout()
         topLayout.addWidget(logo)
@@ -207,10 +208,13 @@ class Main(QWidget):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    bot = Main()
-    p = bot.palette()
-    color = QColor('#c7e2eb')
-    p.setColor(bot.backgroundRole(), color)
-    bot.setPalette(p)
-    bot.show()
+    # bot = Main()
+    qtmodern.styles.dark(app)
+    mw = qtmodern.windows.ModernWindow(Main())
+
+    # p = bot.palette()
+    # color = QColor('#c7e2eb')
+    # p.setColor(bot.backgroundRole(), color)
+    # bot.setPalette(p)
+    mw.show()
     sys.exit(app.exec_())

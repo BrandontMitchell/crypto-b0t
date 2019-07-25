@@ -201,10 +201,6 @@ class Main(QWidget):
         except TypeError as e:
             print(e)
             pass
-        
-    def restartProgram(self):
-        python_arg = sys.executable
-        os.execl(python_arg, python_arg, * sys.argv)
 
 
     

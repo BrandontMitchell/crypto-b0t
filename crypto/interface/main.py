@@ -77,6 +77,7 @@ class Main(QWidget):
         logo = QLabel("Crypto B0t")
         sign_in_btn = QPushButton("Show graph") # press to graph bitcoin
         sign_in_btn.setGeometry(QRect(0, 0, 50, 50))
+        sign_in_btn.clicked.connect(self.restartProgram)
         sign_up_btn = QPushButton("Sign Up")
         topLayout = QHBoxLayout()
         topLayout.addWidget(logo)

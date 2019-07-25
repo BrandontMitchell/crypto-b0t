@@ -64,6 +64,7 @@ class PlotCanvas(FigureCanvas):
         # add plot to axis
         self.figure.clear()
         ax = self.figure.add_subplot(111)
+        self.figure.set_facecolor('lightgray')
 
         # sort and compress data to plottable format
         lists = sorted(r.items())

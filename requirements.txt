@@ -4,3 +4,4 @@ PyQt5
 ccxt
 datetime
 pandas
+qtmodern

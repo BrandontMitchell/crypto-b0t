@@ -5,3 +5,4 @@ ccxt
 datetime
 pandas
 qtmodern
+itertools 

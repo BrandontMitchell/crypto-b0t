@@ -12,7 +12,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
-import sys
+import sys, os
 import requests
 import matplotlib
 import datetime
@@ -63,6 +63,7 @@ class Main(QWidget):
         self.layout()
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
+        
         
         self.show()
 
@@ -199,6 +200,10 @@ class Main(QWidget):
         except TypeError as e:
             print(e)
             pass
+        
+    def restartProgram(self):
+        python_arg = sys.executable
+        os.execl(python_arg, python_arg, * sys.argv)
 
 
     
@@ -206,5 +211,9 @@ class Main(QWidget):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     bot = Main()
+    p = bot.palette()
+    color = QColor('#c7e2eb')
+    p.setColor(bot.backgroundRole(), color)
+    bot.setPalette(p)
     bot.show()
     sys.exit(app.exec_())

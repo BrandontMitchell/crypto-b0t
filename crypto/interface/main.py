@@ -211,10 +211,5 @@ if __name__ == "__main__":
     # bot = Main()
     qtmodern.styles.dark(app)
     mw = qtmodern.windows.ModernWindow(Main())
-
-    # p = bot.palette()
-    # color = QColor('#c7e2eb')
-    # p.setColor(bot.backgroundRole(), color)
-    # bot.setPalette(p)
     mw.show()
     sys.exit(app.exec_())

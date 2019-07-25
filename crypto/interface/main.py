@@ -185,15 +185,20 @@ class Main(QWidget):
         return self.data_arr
     
     def metricStyleSheet(self):
-        if self.data_arr[3] > 0:
-            self.last_trade_share.setStyleSheet('color: green')
-        else:
-            self.last_trade_share.setStyleSheet('color: red')
-        
-        if self.data_arr[0] > (self.data_arr[2] + self.data_arr[2] * 0.01):
-            self.current_price.setStyleSheet('color: green')
-        else:
-            self.current_price.setStyleSheet('color: red')
+        try:
+                
+            if self.data_arr[3] > 0:
+                self.last_trade_share.setStyleSheet('color: green')
+            else:
+                self.last_trade_share.setStyleSheet('color: red')
+            
+            if self.data_arr[0] > (self.data_arr[2] + self.data_arr[2] * 0.01):
+                self.current_price.setStyleSheet('color: green')
+            else:
+                self.current_price.setStyleSheet('color: red')
+        except TypeError as e:
+            print(e)
+            pass
 
 
     

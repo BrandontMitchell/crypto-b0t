@@ -135,6 +135,18 @@ class Main(QWidget):
         self.risk.setSingleStep(1)
         self.submit = QPushButton("Submit Values")
 
+        self.time_val = self.time_box.text()
+        self.coin_selling_val = self.coin_selling.text()
+        self.coin_buying_val = self.coin_buying.text()
+        self.lowest_price_val = self.lowest_price.text()
+        self.highest_price_val = self.highest_price.text()
+        self.risk_val = self.risk.value()
+
+        data = [self.time_val, self.coin_selling_val, self.coin_buying_val, self.lowest_price_val, \
+                self.highest_price_val, self.risk_val]
+
+        self.submit.connect(self.createSettings(data))
+
         # add labels and buttons to right middle box
         middleRight.addWidget(self.current_price)
         middleRight.addWidget(self.current_vol)
@@ -158,13 +170,18 @@ class Main(QWidget):
         self.metricStyleSheet()
         self.metricsBox.setLayout(middleRight)
 
-    def createSettings(self): 
+    def createSettings(self, data): 
         self.settingsBox = QGroupBox("Settings")
-        setting_label = QLabel("Setting")
-        setting_label.setGeometry(QRect(0, 0, 2000, 200))
+
+        self.time_set = QLabel("# of days graphed: " + data[0])
+        self.coin_sell_set = QLabel("Coin selling: " + data[1])
+        self.coin_buy_set = QLabel("Coin buying: " + data[2])
+        
+
+
         
         lowerMiddle = QHBoxLayout()
-        lowerMiddle.addWidget(setting_label)
+        lowerMiddle.addWidget()
         self.settingsBox.setLayout(lowerMiddle)
 
 
@@ -186,7 +203,8 @@ class Main(QWidget):
 
         self.data_arr = [self.price, self.vol, self.week_avg, self.slope]
         return self.data_arr
-    
+
+
     def metricStyleSheet(self):
         try:
                 

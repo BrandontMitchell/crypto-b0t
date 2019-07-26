@@ -64,7 +64,7 @@ class PlotCanvas(FigureCanvas):
         # add plot to axis
         self.figure.clear()
         ax = self.figure.add_subplot(111)
-        self.figure.set_facecolor('lightgray')
+        # self.figure.set_facecolor('lightgray')
 
         # sort and compress data to plottable format
         lists = sorted(r.items())
@@ -78,13 +78,13 @@ class PlotCanvas(FigureCanvas):
         ax.annotate(f'Local Max of{price_max} on {date_max}', xy=(date_max, price_max), xytext=(date_max, price_max+5000),
                     arrowprops=dict(facecolor='green', shrink=0.05),
                     )
-        ax.annotate(f'Local Min of {price_min} on {date_min}', xy=(date_min, price_min), xytext=(date_min, price_min-5000),
+        ax.annotate(f'Local Min of {price_min} on {date_min}', xy=(date_min, price_min), xytext=(date_min, price_min-7000),
                     arrowprops=dict(facecolor='red', shrink=0.05),
                     )
         ax.annotate(f'Current Price: {prices[-1]}', xy=(dates[-1], prices[-1]), xytext=(dates[-20], prices[-1]-5000),
                     arrowprops=dict(facecolor='blue', shrink=0.15),
                     )
-        ax.set_ylim(0, 20_000)
+        ax.set_ylim(0, 20_000)   
 
         self.draw()
 

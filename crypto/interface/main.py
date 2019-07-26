@@ -204,13 +204,22 @@ class Main(QWidget):
         self.coin_buy_set.setText("Coin buying: " + str(data[2]))
         self.lowest_set.setText("Lowest price to sell: " + str(data[3]))
         self.highest_set.setText("Highest price to sell: " + str(data[4]))
-        
+
 
     def createFooter(self):
         self.footerBox = QGroupBox("Footer")
         footer_label = QLabel("@htb 2019")
+        buy_label = QLabel("Press to initiate buying")
+        buy_btn = QPushButton("Buy")
+        sell_label = QLabel("Press to initiate selling")
+        sell_btn = QPushButton("Sell")
+
         lower = QVBoxLayout()
         lower.addWidget(footer_label)
+        lower.addWidget(buy_label)
+        lower.addWidget(buy_btn)
+        lower.addWidget(sell_label)
+        lower.addWidget(sell_btn)
         self.footerBox.setLayout(lower)
 
 

@@ -176,7 +176,7 @@ class Main(QWidget):
         self.settingsBox = QGroupBox("Settings")
         lowerMiddle = QHBoxLayout()
 
-        
+        # initiate setting labels
         self.time_set = QLabel("# of days graphed: ")
         self.coin_sell_set = QLabel("Coin selling: ")
         self.coin_buy_set = QLabel("Coin buying: ")
@@ -189,6 +189,7 @@ class Main(QWidget):
         # except:
         #     pass
         
+        # add to horizontal box layout
         lowerMiddle.addWidget(self.time_set)
         lowerMiddle.addWidget(self.coin_sell_set)
         lowerMiddle.addWidget(self.coin_buy_set)
@@ -198,6 +199,8 @@ class Main(QWidget):
         self.settingsBox.setLayout(lowerMiddle)
 
     def updateSettings(self):
+
+        # grab text after input and update those setting labels
         data = [self.time_box.text(), self.coin_selling.text(), self.coin_buying.text(), self.lowest_price.text(), self.highest_price.text()]
         self.time_set.setText("# of days graphed: " + str(data[0]))
         self.coin_sell_set.setText("Coin selling: " + str(data[1]))
@@ -208,13 +211,16 @@ class Main(QWidget):
 
     def createFooter(self):
         self.footerBox = QGroupBox("Footer")
+        lower = QVBoxLayout()
+        
+        # create some lower right labels and buttons to initiate buying/selling
         footer_label = QLabel("@htb 2019")
         buy_label = QLabel("Press to initiate buying")
         buy_btn = QPushButton("Buy")
         sell_label = QLabel("Press to initiate selling")
         sell_btn = QPushButton("Sell")
 
-        lower = QVBoxLayout()
+        # add to layout
         lower.addWidget(footer_label)
         lower.addWidget(buy_label)
         lower.addWidget(buy_btn)

@@ -127,7 +127,7 @@ class Main(QWidget):
         self.highest_price_lb = QLabel("Enter highest price to sell at: ")
         self.highest_price = QLineEdit(self)
         self.risk = QSlider(Qt.Horizontal)
-        self.risk.setValue(self.risk.value())
+        # self.risk.setValue(self.risk.value())
         self.risk_lb = QLabel("Enter risk factor: ")
         self.risk.setFocusPolicy(Qt.StrongFocus)
         self.risk.setTickPosition(QSlider.TicksBothSides)
@@ -135,17 +135,19 @@ class Main(QWidget):
         self.risk.setSingleStep(1)
         self.submit = QPushButton("Submit Values")
 
-        self.time_val = self.time_box.text()
-        self.coin_selling_val = self.coin_selling.text()
-        self.coin_buying_val = self.coin_buying.text()
-        self.lowest_price_val = self.lowest_price.text()
-        self.highest_price_val = self.highest_price.text()
-        self.risk_val = self.risk.value()
+        # self.time_val = self.time_box.text()
+        # self.coin_selling_val = self.coin_selling.text()
+        # self.coin_buying_val = self.coin_buying.text()
+        # self.lowest_price_val = self.lowest_price.text()
+        # self.highest_price_val = self.highest_price.text()
+        # self.risk_val = self.risk.valueChanged()
 
-        data = [self.time_val, self.coin_selling_val, self.coin_buying_val, self.lowest_price_val, \
-                self.highest_price_val, self.risk_val]
+        # data = [self.time_val, self.coin_selling_val, self.coin_buying_val, self.lowest_price_val, \
+        #         self.highest_price_val] # self.risk_val
 
-        self.submit.connect(self.createSettings(data))
+        
+
+        self.submit.clicked.connect(self.updateSettings)
 
         # add labels and buttons to right middle box
         middleRight.addWidget(self.current_price)
@@ -170,20 +172,34 @@ class Main(QWidget):
         self.metricStyleSheet()
         self.metricsBox.setLayout(middleRight)
 
-    def createSettings(self, data): 
+    def createSettings(self): 
         self.settingsBox = QGroupBox("Settings")
-
-        self.time_set = QLabel("# of days graphed: " + data[0])
-        self.coin_sell_set = QLabel("Coin selling: " + data[1])
-        self.coin_buy_set = QLabel("Coin buying: " + data[2])
-        
-
-
-        
         lowerMiddle = QHBoxLayout()
-        lowerMiddle.addWidget()
+
+        
+        self.time_set = QLabel("# of days graphed: ")
+        self.coin_sell_set = QLabel("Coin selling: ")
+        self.coin_buy_set = QLabel("Coin buying: ")
+        self.lowest_set = QLabel("Lowest price to sell: ")
+        self.highest_set = QLabel("Highest price to sell: ")
+
+        # try:
+        #     self.risk_set = QLabel("Risk factor: " + str(data[5]))
+        #     lowerMiddle.addWidget(self.risk_set)
+        # except:
+        #     pass
+        
+        lowerMiddle.addWidget(self.time_set)
+        lowerMiddle.addWidget(self.coin_sell_set)
+        lowerMiddle.addWidget(self.coin_buy_set)
+        lowerMiddle.addWidget(self.lowest_set)
+        lowerMiddle.addWidget(self.highest_set)
+        
         self.settingsBox.setLayout(lowerMiddle)
 
+    def updateSettings(self):
+        data = [self.time_box.text(), self.coin_selling.text(), self.coin_buying.text(), self.lowest_price.text(), self.highest_price.text()]
+        self.time_set.setText("# of days graphed: " + str(data[0]))
 
     def createFooter(self):
         self.footerBox = QGroupBox("Footer")

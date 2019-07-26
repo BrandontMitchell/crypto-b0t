@@ -200,6 +200,11 @@ class Main(QWidget):
     def updateSettings(self):
         data = [self.time_box.text(), self.coin_selling.text(), self.coin_buying.text(), self.lowest_price.text(), self.highest_price.text()]
         self.time_set.setText("# of days graphed: " + str(data[0]))
+        self.coin_sell_set.setText("Coin selling: " + str(data[1]))
+        self.coin_buy_set.setText("Coin buying: " + str(data[2]))
+        self.lowest_set.setText("Lowest price to sell: " + str(data[3]))
+        self.highest_set.setText("Highest price to sell: " + str(data[4]))
+        
 
     def createFooter(self):
         self.footerBox = QGroupBox("Footer")

@@ -28,9 +28,8 @@ class PlotCanvas(FigureCanvas):
         self.bitcoinTrack('btc', 50)
 
     def bitcoinTrack(self, coin, time):
-        '''
-            live bitcoin tracking
-        '''
+        '''live bitcoin tracking'''
+
         self.baseURL = 'https://api.coindesk.com/v1/bpi/'
         self.today = datetime.date.today()
         print(self.today)
@@ -39,9 +38,8 @@ class PlotCanvas(FigureCanvas):
         self.get_historical_data(self.coin, self.historical_date, self.today)
 
     def get_historical_data(self, coin, start, end):
-        '''
-        gathers historical data with given currency, start, end
-        '''
+        '''gathers historical data with given currency, start, end'''
+
         start = f'{start.year:#02d}-{start.month:#02}-{start.day:#02}'
         end = f'{end.year:#02}-{end.month:#02d}-{end.day:#02d}'
         url = f'{self.baseURL}historical/close.json?currency={coin}&start={start}&end={end}'
@@ -73,6 +71,8 @@ class PlotCanvas(FigureCanvas):
         # graph visuals
         ax.plot(x, y, 'tab:blue')
         ax.set_title('BTC Tracker')
+        ax.set_xlabel('Date UTC')
+        ax.set_ylabel('Price (USD)')
 
         # add arrows for high, low, and current price
         ax.annotate(f'Local Max of{price_max} on {date_max}', xy=(date_max, price_max), xytext=(date_max, price_max+5000),

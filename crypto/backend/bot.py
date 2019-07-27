@@ -5,10 +5,20 @@ import pandas as pd
 
 class Bot:
 
+    ''' 
+        
+        Welcome to hometownboys' crypto bot. This is a python project to help automate
+        the buying and selling of crypto currencies.
+
+        The Bot class takes in no inputs, however we should add the option to trade different
+        crypto coins. This class reads the api key with binance (and binance only), creates a 
+        dataframe with the binance exchange market and we can do some data manipulation with it.
+
+    '''
+
     def __init__(self):
-        '''
-        initialize setup, api auth, and exchange market
-        '''
+        ''' initialize setup, api auth, and exchange market '''
+
         with open("crypto.conf") as f:
             lines = f.readlines()
             key = lines[0].strip()
@@ -27,15 +37,13 @@ class Bot:
         self.weekly_average('BTC/USDC')
 
     def purchase_price(self, price):
-        '''
-        hold variable for initial buy price
-        '''
+        ''' hold variable for initial buy price '''
         return price 
 
     def weekly_average(self, coin):
         '''
-        gathers market data, displays a dataframe including date, open, high, low, close, and volume.
-        from this we gather the weekly price average (a filter for buying and selling)
+            gathers market data, displays a dataframe including date, open, high, low, close, and volume.
+            from this we gather the weekly price average (a filter for buying and selling)
         '''
         self.balance = self.exchange.fetch_balance()
 
@@ -48,11 +56,11 @@ class Bot:
 
     def get_current_data(self, data):
         '''
-        gathers current data
-        :type: coin --> string referencing specific crypto i.e. 'btc'
-        :rtype: current_price --> int 
-        :rtype: current_vol --> int
-        :rtype: 
+            gathers current data
+            :type: coin --> string referencing specific crypto i.e. 'btc'
+            :rtype: current_price --> int 
+            :rtype: current_vol --> int
+            :rtype: weekly_avg --> int
         '''
         try: 
             week_avg = data.tail(7)['close'].mean()
@@ -64,9 +72,9 @@ class Bot:
 
     def get_market_slope(self, data):
         '''
-        gathers current market slope
-        :type: data --> dataframe of most recent trades? (last 5 or so)
-        :rtype: slope --> float (positive means U shape, negative means n shape)
+            gathers current market slope
+            :type: data --> dataframe of most recent trades? (last 5 or so)
+            :rtype: slope --> float (positive means U shape, negative means n shape)
         '''
         df = data[['close', 'date']]
         df = df.tail(360)

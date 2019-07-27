@@ -9,10 +9,6 @@ import datetime
 import json
 from crypto.backend.bot import Bot
 
-# https://www.coindesk.com/api
-# https://github.com/L1Cafe/Coindesk-Python-API-client/blob/master/coindesk/client.py
-
-
 class PlotCanvas(FigureCanvas):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)

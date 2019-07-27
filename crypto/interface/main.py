@@ -6,8 +6,6 @@ from PyQt5.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateTimeEdit,
         QProgressBar, QPushButton, QRadioButton, QScrollBar, QSizePolicy,
         QSlider, QSpinBox, QStyleFactory, QTableWidget, QTabWidget, QTextEdit,
         QVBoxLayout, QWidget, QMessageBox)
-
-# from matplotlib.backends.qt_compat import QtCore, QtWidets
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 import matplotlib.pyplot as plt
@@ -22,8 +20,6 @@ import qtmodern.windows
 from crypto.interface.graph import PlotCanvas   # import from top level
 from crypto.backend.bot import Bot                  # import from top level
 
-# received top level package relative import error, to fix we must run from top level... i.e. ~/Desktop/cbot/crypto-b0t 
-# and type: python3 -m crypto.interface.main
 
 class Main(QWidget):
     '''
@@ -55,6 +51,7 @@ class Main(QWidget):
 
 
     def initUI(self):
+        ''' initialize the user interface '''
         self.title = 'Crypto B0t'
         self.x = 200
         self.y = 200
@@ -66,26 +63,25 @@ class Main(QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.x, self.y, self.width, self.height)
         
-        
         self.show()
 
     def layout(self):
-        
+        ''' initialize the various box layouts within the ui'''
         self.createGraph()
         self.createMetrics(self.createData())
         self.createSettings()
         self.createFooter()
 
-        logo = QLabel("Crypto B0t")
-        topLayout = QHBoxLayout()
-        topLayout.addWidget(logo)
-
+        # grid layout, this is the layout for the entire window
         main = QGridLayout()
-        # main.addLayout(topLayout, 0, 0, 1, 2)
+
+        # add sub layouts to main layout
         main.addWidget(self.graphBox, 1, 0)
         main.addWidget(self.metricsBox, 1, 1)
         main.addWidget(self.settingsBox, 2, 0)
         main.addWidget(self.footerBox, 2, 1)
+
+        # set column widths for ux
         main.setColumnStretch(0, 6)
         main.setColumnStretch(1, 4)
         main.setRowStretch(1, 8)
@@ -93,6 +89,7 @@ class Main(QWidget):
         self.setLayout(main)
 
     def createGraph(self):
+        ''' creates graph layout '''
         self.graphBox = QGroupBox("Graph")
         self.middleLeft = QVBoxLayout()
         self.middleLeft.addWidget(self.graph)
@@ -100,6 +97,7 @@ class Main(QWidget):
         
     
     def createMetrics(self, data):
+        ''' creates metrics layout, takes data as input '''
         self.metricsBox = QGroupBox("Metrics")
         middleRight = QVBoxLayout()
 
@@ -156,6 +154,7 @@ class Main(QWidget):
         self.metricsBox.setLayout(middleRight)
 
     def createSettings(self): 
+        ''' create settings layout '''
         self.settingsBox = QGroupBox("Settings")
         lowerMiddle = QHBoxLayout()
 
@@ -165,12 +164,6 @@ class Main(QWidget):
         self.coin_buy_set = QLabel("Coin buying: ")
         self.lowest_set = QLabel("Lowest price to sell: ")
         self.highest_set = QLabel("Highest price to sell: ")
-
-        # try:
-        #     self.risk_set = QLabel("Risk factor: " + str(data[5]))
-        #     lowerMiddle.addWidget(self.risk_set)
-        # except:
-        #     pass
         
         # add to horizontal box layout
         lowerMiddle.addWidget(self.time_set)
@@ -182,17 +175,20 @@ class Main(QWidget):
         self.settingsBox.setLayout(lowerMiddle)
 
     def updateSettings(self):
+        ''' update settings frame after user input '''
 
-        # grab text after input and update those setting labels
+        # grab text after input and store as list
         data = [self.time_box.text(), self.coin_selling.text(), self.coin_buying.text(), self.lowest_price.text(), self.highest_price.text()]
+        
+        # update respective data entries
         self.time_set.setText("# of days graphed: " + str(data[0]))
         self.coin_sell_set.setText("Coin selling: " + str(data[1]))
         self.coin_buy_set.setText("Coin buying: " + str(data[2]))
         self.lowest_set.setText("Lowest price to sell: " + str(data[3]))
         self.highest_set.setText("Highest price to sell: " + str(data[4]))
 
-
     def createFooter(self):
+        ''' create footer layout, where buying/selling is done '''
         self.footerBox = QGroupBox("Footer")
         lower = QVBoxLayout()
         data = self.bot.weekly_average('BTC/USDC')
@@ -216,18 +212,21 @@ class Main(QWidget):
 
 
     def createData(self):
-        
+        ''' grabs all data from backend (bot.py) '''
+
         data = self.bot.weekly_average('BTC/USDC')
         self.price = self.bot.get_current_data(data)[0]
         self.vol = self.bot.get_current_data(data)[1]
         self.week_avg = self.bot.get_current_data(data)[2]
         self.slope = self.bot.get_market_slope(data)
 
+        # stores data as an array for easy manipulation
         self.data_arr = [self.price, self.vol, self.week_avg, self.slope]
         return self.data_arr
 
 
     def metricStyleSheet(self):
+        ''' ui elemental features '''
         try:
                 
             if self.data_arr[3] > 0:

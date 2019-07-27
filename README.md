@@ -17,7 +17,7 @@ first python program ever)! There are many bugs in this program, and we still wo
 but we were just having fun and trying something a little out of our comfort zone :) 
 
 
-[cbot.PNG]
+![Screenshot](cbot.png)
 
 ## Getting Started
 

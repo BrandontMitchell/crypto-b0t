@@ -195,11 +195,14 @@ class Main(QWidget):
     def createFooter(self):
         self.footerBox = QGroupBox("Footer")
         lower = QVBoxLayout()
+        data = self.bot.weekly_average('BTC/USDC')
         
         # create some lower right labels and buttons to initiate buying/selling
         footer_label = QLabel("@htb 2019")
         buy_label = QLabel("Press to initiate buying")
         buy_btn = QPushButton("Buy")
+        buy_btn.clicked.connect(self.bot.execute_purchase('BTC/USDC', data, self.coin_buying))
+        
         sell_label = QLabel("Press to initiate selling")
         sell_btn = QPushButton("Sell")
 

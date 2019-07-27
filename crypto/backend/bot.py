@@ -91,19 +91,18 @@ class Bot:
         curr_date = df.iloc[-1]['date']
 
         slope = ((curr_price-prev_price)/(curr_date-prev_date))
-        slope_pos = False
-        if slope > 0: slope_pos = True
 
         return slope 
 
 
-    def execute_purchase(self, coin, data):
+    def execute_purchase(self, coin, data, price):
         ''' checks all three filters, and makes a decision to hold or buy'''
+
         symbol = 'USDC/BTC'
         type = 'market'
         side = 'buy'
         amount = 0.001
-        price = 0.40 
+        price = price 
         params = {
             'test': True
         }
@@ -113,4 +112,4 @@ class Bot:
             print(order)    
         
         else:
-            return f'Filters failed, retrying...'
+            print(f'Filters failed, retry...') 

@@ -1,4 +1,4 @@
-# Project Title
+# crypto-R2
 
 This is a crypto bot made entirely with python. Using the `ccxt` library, we were able to create
 an automated bot that will buy and sell given specific filters. We make sure before buying, that 
@@ -29,7 +29,6 @@ git clone https://github.com/BrandontMitchell/crypto-b0t.git
 cd crypto
 pip install -r requirements.txt
 python -m crypto.interface.main
-
 ```
 ## Built With
 
@@ -45,4 +44,4 @@ python -m crypto.interface.main
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

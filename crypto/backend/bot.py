@@ -98,9 +98,7 @@ class Bot:
 
 
     def execute_purchase(self, coin, data):
-        '''
-        checks all three filters, and makes a decision to hold or buy
-        '''
+        ''' checks all three filters, and makes a decision to hold or buy'''
         symbol = 'USDC/BTC'
         type = 'market'
         side = 'buy'

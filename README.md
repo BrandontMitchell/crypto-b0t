@@ -17,7 +17,7 @@ first python program ever)! There are many bugs in this program, and we still wo
 but we were just having fun and trying something a little out of our comfort zone :) 
 
 
-![Screenshot](cbot.png)
+![Screenshot](https://github.com/BrandontMitchell/crypto-b0t/blob/master/cbot.PNG)
 
 ## Getting Started
 

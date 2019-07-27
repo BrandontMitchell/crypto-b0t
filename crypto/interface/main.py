@@ -77,16 +77,11 @@ class Main(QWidget):
         self.createFooter()
 
         logo = QLabel("Crypto B0t")
-        sign_in_btn = QPushButton("Show graph") # press to graph bitcoin
-        sign_in_btn.setGeometry(QRect(0, 0, 50, 50))
-        sign_up_btn = QPushButton("Sign Up")
         topLayout = QHBoxLayout()
         topLayout.addWidget(logo)
-        topLayout.addWidget(sign_in_btn)
-        topLayout.addWidget(sign_up_btn)
 
         main = QGridLayout()
-        main.addLayout(topLayout, 0, 0, 1, 2)
+        # main.addLayout(topLayout, 0, 0, 1, 2)
         main.addWidget(self.graphBox, 1, 0)
         main.addWidget(self.metricsBox, 1, 1)
         main.addWidget(self.settingsBox, 2, 0)
@@ -99,9 +94,9 @@ class Main(QWidget):
 
     def createGraph(self):
         self.graphBox = QGroupBox("Graph")
-        middleLeft = QVBoxLayout()
-        middleLeft.addWidget(self.graph)
-        self.graphBox.setLayout(middleLeft)
+        self.middleLeft = QVBoxLayout()
+        self.middleLeft.addWidget(self.graph)
+        self.graphBox.setLayout(self.middleLeft)
         
     
     def createMetrics(self, data):
@@ -133,19 +128,7 @@ class Main(QWidget):
         self.risk.setTickPosition(QSlider.TicksBothSides)
         self.risk.setTickInterval(10)
         self.risk.setSingleStep(1)
-        self.submit = QPushButton("Submit Values")
-
-        # self.time_val = self.time_box.text()
-        # self.coin_selling_val = self.coin_selling.text()
-        # self.coin_buying_val = self.coin_buying.text()
-        # self.lowest_price_val = self.lowest_price.text()
-        # self.highest_price_val = self.highest_price.text()
-        # self.risk_val = self.risk.valueChanged()
-
-        # data = [self.time_val, self.coin_selling_val, self.coin_buying_val, self.lowest_price_val, \
-        #         self.highest_price_val] # self.risk_val
-
-        
+        self.submit = QPushButton("Submit Values")        
 
         self.submit.clicked.connect(self.updateSettings)
 
@@ -262,7 +245,6 @@ class Main(QWidget):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    # bot = Main()
     qtmodern.styles.dark(app)
     mw = qtmodern.windows.ModernWindow(Main())
     mw.show()

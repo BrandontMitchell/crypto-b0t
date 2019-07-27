@@ -16,6 +16,9 @@ was actually to get my friends and I more involved with python projects, (two of
 first python program ever)! There are many bugs in this program, and we still work on it here and there, 
 but we were just having fun and trying something a little out of our comfort zone :) 
 
+
+[cbot.PNG]
+
 ## Getting Started
 
 Here are the steps for cloning and running this project. 
